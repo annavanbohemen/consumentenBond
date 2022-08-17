@@ -12,6 +12,14 @@
 				</div>
 			</div>
 
+			<div *ngIf="loading">
+				<div class="spinner-border text-primary" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<strong>bezig met verwerken...</strong>
+			</div>
+			
+
 			<div class="contact-form">
 				<div class="card">
 					<form (submit)="onSubmit()" class="card-body" [formGroup]="contactForm">

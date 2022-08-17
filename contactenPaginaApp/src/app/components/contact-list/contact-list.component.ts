@@ -10,22 +10,28 @@ import { ContactService } from 'src/app/service/contact.service';
 export class ContactListComponent implements OnInit {
 
   Contacts: IContact[] = [];
+  loading = false;
   basic = false;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
     // get contacts from service
-    this.contactService.getContacts().subscribe(contacts => {
-        this.Contacts = contacts.contacts;
-      })
+    this.getContacts();
+  }
 
-      this.capitalizeFirstLetter(this.Contacts)
+  getContacts() {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.Contacts = contacts.contacts;
+    })
   }
 
   deleteContact(contact: IContact){
+    this.loading = true;
     this.contactService.removeContacts().subscribe(res => {
       console.log('response', res)
+      this.getContacts();
+      this.loading = false;
     })
   }
 

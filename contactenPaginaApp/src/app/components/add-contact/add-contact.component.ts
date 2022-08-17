@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AddContactComponent implements OnInit {
 
   contactForm!: FormGroup;
-
+  loading = false;
   basic = false;
 
   constructor(private contactService: ContactService, private fb: FormBuilder) { }
@@ -31,6 +31,7 @@ export class AddContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
 
     let contactParams = {
         work: this.contactForm.value.work,
@@ -42,8 +43,13 @@ export class AddContactComponent implements OnInit {
       this.contactService.postContact(contactParams)
       .subscribe((res) => {
           console.log('contact is opgeslagen', res)
+          this.loading = false;
           this.contactForm.reset();
         },
+        (err) => {
+          console.log('error', err)
+          this.loading = false;
+        }
         )
   }
 
