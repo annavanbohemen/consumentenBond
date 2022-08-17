@@ -17,8 +17,8 @@ export class ContactService {
 
   postContact(contactInfo: any ): Observable<IContact> {
 
-    let params: HttpParams = createHttpParams({
-      contact: contactInfo.work,
+    let contactParams: HttpParams = createHttpParams({
+      work: contactInfo.work,
       name: contactInfo.name,
       email: contactInfo.email,
       phone: contactInfo.phone,
@@ -26,7 +26,7 @@ export class ContactService {
 
     return this.http.post<IContact>(
       this.ContactSaveUrl,
-      contactInfo, {
+      contactParams, {
         responseType: 'json'
       })
   }
