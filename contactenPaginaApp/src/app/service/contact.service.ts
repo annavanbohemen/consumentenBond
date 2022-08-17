@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IContact, IContactsList } from '../models/contact';
+import { IContact, IContactsList, IresponseContactList } from '../models/contact';
 import { createHttpParams } from './http-params';
 
 @Injectable({
@@ -31,17 +31,22 @@ export class ContactService {
       })
   }
 
-  getContacts(): Observable<IContactsList> {
-    return this.http.get<IContactsList>(
+  getContacts(): Observable<IresponseContactList> {
+    return this.http.get<IresponseContactList>(
       this.ContactListUrl, {
         responseType: 'json'
       })
   }
 
-  removeContacts(): Observable<IContact> {
-    return this.http.get<IContact>(
-      this.ContactDeleteUrl, {
+  removeContacts(id: number): Observable<any> {
+
+    let deleteParams: HttpParams = createHttpParams({
+      id: id
+    })
+
+    return this.http.delete<any>(
+      this.ContactDeleteUrl + '/' + id, {
         responseType: 'json'
-      })
+    })
   }
 }

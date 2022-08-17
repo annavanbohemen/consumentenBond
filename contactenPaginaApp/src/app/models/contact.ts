@@ -6,6 +6,11 @@ export interface IContact {
 	phone?: string;
 }
 
+export interface IresponseContactList {
+	message: string;
+	data: IContactsList
+}
+
 export interface IContactsList {
 	contacts: IContact[];
 }

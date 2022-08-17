@@ -21,18 +21,19 @@ export class ContactListComponent implements OnInit {
   }
 
   getContacts() {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.Contacts = contacts.contacts;
+    this.contactService.getContacts().subscribe(res => {
+      this.Contacts = res.data.contacts;
     })
   }
 
   deleteContact(contact: IContact){
     this.loading = true;
-    this.contactService.removeContacts().subscribe(res => {
-      console.log('response', res)
-      this.getContacts();
-      this.loading = false;
-    })
+    if(contact.id){
+      this.contactService.removeContacts(contact.id).subscribe(res => {
+        this.getContacts();
+        this.loading = false;
+      })
+    }
   }
 
   capitalizeFirstLetter(contacts: IContact[]) {

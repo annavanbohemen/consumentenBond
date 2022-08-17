@@ -61,9 +61,9 @@ app.post("/contacten/save", (req, res) => {
 });
 
 //remove contact
-app.delete("contacten/delete", (req, res) => {
+app.delete("/contacten/delete/:id", (req, res) => {
     var data = {
-        id: req.body.id
+        id: req.params.id
     }
 
     removeContact(data, (err) => {
@@ -71,7 +71,6 @@ app.delete("contacten/delete", (req, res) => {
             res.status(400).json({"error": err.message})
             return;
         }
-
 
         res.json({
             "message": "success"
@@ -81,7 +80,6 @@ app.delete("contacten/delete", (req, res) => {
 
 // functions for db calls
 function saveContact(data, callback){
-    console.log(data)
     var sql = 'INSERT INTO contacten (name, email, phone) VALUES (?,?,?)'
     var params = [data.name, data.email, data.phone]
 
