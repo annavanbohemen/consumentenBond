@@ -40,9 +40,11 @@ export class AddContactComponent implements OnInit {
       }
       
       this.contactService.postContact(contactParams)
-      .subscribe((res: any) => {
-        console.log('contact has been saved', res)
-      })
-    }
+      .subscribe((res) => {
+          console.log('contact is opgeslagen', res)
+          this.contactForm.reset();
+        },
+        )
+  }
 
 }

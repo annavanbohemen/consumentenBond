@@ -25,7 +25,7 @@ export class ContactService {
     })
 
     return this.http.post<IContact>(
-      `${this.ContactSaveUrl}/${contactInfo.version}`,
+      this.ContactSaveUrl,
       contactInfo, {
         responseType: 'json'
       })

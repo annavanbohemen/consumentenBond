@@ -24,8 +24,7 @@ app.get("/", (req, res, next) => {
 
 //get contacten
 app.get("/contacten/list", (req, res) => {
-    var data = "select * from contacten"
-    var sql = {contacts: data}
+    var sql = "select * from contacten"
     db.all(sql, (err, rows) => {
         if (err) {
             res.status(400).json({ "error": err.message });
@@ -33,7 +32,7 @@ app.get("/contacten/list", (req, res) => {
         }
         res.json({
             "message": "success",
-            "data": rows
+            "data": {contacts: rows}
         })
     });
 })
