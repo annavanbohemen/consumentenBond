@@ -20,30 +20,6 @@ export class ContactListComponent implements OnInit {
         this.Contacts = contacts.contacts;
       })
 
-      // remove after testing
-      this.Contacts = [
-      {
-        contact: 'prive',
-        name: 'John Doe',
-      },
-      {
-        contact: 'werk',
-        name: 'John Doe',
-        email: 'john@doe.nl',	
-        phone: '0612345678'
-      },
-      {
-        contact: 'prive',
-        name: 'Piet Zwart'
-      },
-      {
-        contact: 'werk',
-        name: 'Piet Zwart',
-        email: 'piet@zwart.nl',	
-        phone: '0612345678'
-      }
-      ]
-
       this.capitalizeFirstLetter(this.Contacts)
   }
 
