@@ -32,22 +32,17 @@ export class AddContactComponent implements OnInit {
 
   onSubmit() {
 
-    console.log(this.contactForm)
-    console.log(this.contactForm.value)
-
     let contactParams = {
         work: this.contactForm.value.work,
         name: this.contactForm.value.name,
         email: this.contactForm.value.email,
         phone: this.contactForm.value.phone,	
       }
-
-      console.log('contactParams',)
       
-      // this.contactService.postContact(contactParams)
-      // .subscribe((res: any) => {
-      //   console.log('contact has been saved', res)
-      // })
+      this.contactService.postContact(contactParams)
+      .subscribe((res: any) => {
+        console.log('contact has been saved', res)
+      })
     }
 
 }
