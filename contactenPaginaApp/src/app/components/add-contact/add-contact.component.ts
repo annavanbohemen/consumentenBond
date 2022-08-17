@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/service/contact.service';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-contact',
@@ -9,16 +10,20 @@ import { FormControl } from '@angular/forms';
 })
 export class AddContactComponent implements OnInit {
 
-  work = new FormControl('');
-  name = new FormControl('');
-  email = new FormControl('');
-  phone = new FormControl('');
+  contactForm!: FormGroup;
 
   basic = false;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.contactForm = this.fb.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      work: new FormControl('', Validators.required),
+      email: new FormControl(''),
+      phone: new FormControl('')
+      
+    })
   }
 
   checkChange() {
@@ -26,17 +31,23 @@ export class AddContactComponent implements OnInit {
   }
 
   onSubmit() {
+
+    console.log(this.contactForm)
+    console.log(this.contactForm.value)
+
     let contactParams = {
-        work: this.work.value,
-        name: this.name.value,
-        email: this.email.value,
-        phone: this.phone.value,	
+        work: this.contactForm.value.work,
+        name: this.contactForm.value.name,
+        email: this.contactForm.value.email,
+        phone: this.contactForm.value.phone,	
       }
+
+      console.log('contactParams',)
       
-      this.contactService.postContact(contactParams)
-      .subscribe((res: any) => {
-        console.log('contact has been saved', res)
-      })
+      // this.contactService.postContact(contactParams)
+      // .subscribe((res: any) => {
+      //   console.log('contact has been saved', res)
+      // })
     }
 
 }

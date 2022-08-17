@@ -14,31 +14,55 @@
 
 			<div class="contact-form">
 				<div class="card">
-					<form (submit)="onSubmit()" class="card-body">
+					<form (submit)="onSubmit()" class="card-body" [formGroup]="contactForm">
 						<div class="mb-3">
 							<label for="inputState" class="form-label">Contact soort</label>
-							<select id="inputState" class="form-control" [formControl]="work">
+							<select id="inputState" class="form-control" formControlName="work">
 								<option value="" disabled selected hidden>werk of privé</option>
 								<option value="werk">Werk</option>
 								<option value="prive">Privé</option>
 							</select>
-						  </div>
+
+							<div *ngIf="contactForm.controls['work'].invalid && (contactForm.controls['work'].dirty || contactForm.controls['work'].touched)" class="red-text">
+								<div *ngIf="contactForm.controls['work'].errors?.['required']">
+									Contact soort is verplicht
+								</div>
+							</div>
+						</div>
+
+						
+
 						<div class="mb-3">
 						  <label for="name" class="form-label">Naam</label>
-						  <input type="name" class="form-control" [formControl]="name" id="name" placeholder="vul uw naam in">
+						  <input type="name" class="form-control" formControlName="name" id="name" placeholder="vul uw naam in">
+
+						  <div *ngIf="contactForm.controls['name'].invalid && (contactForm.controls['name'].dirty || contactForm.controls['name'].touched)" class="red-text">
+							<div *ngIf="contactForm.controls['name'].errors?.['required']">
+								Naam is verplicht.
+							</div>
+							<div *ngIf="contactForm.controls['name'].errors?.['minlength']">
+								Name must be at least 3 characters long.
+							</div>
 						</div>
+						</div>
+
 						<ng-container *ngIf="basic">
 							<div class="mb-3">
 								<label for="email" class="form-label">E-mail adres</label>
-								<input type="email" class="form-control" id="email" placeholder="name@example.com">
-							  </div>
+								<input type="email" class="form-control" id="email" email formControlName="email" placeholder="name@example.com">
+
+								<div *ngIf="contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)" class="red-text">
+									E-mail adress is niet correct
+								</div>
+							</div>
+
 							<div class="mb-3">
 								<label for="phone" class="form-label">Telefoonnummer</label>
-								<input type="number" class="form-control" id="phone" placeholder="0612345678">
+								<input type="number" class="form-control" id="phone" formControlName="phone" placeholder="0612345678">
 							</div>
 						</ng-container>
 						
-						<button type="submit" class="btn btn-primary">Opslaan</button>
+						<button type="submit" class="btn btn-primary" [disabled]="contactForm.status != 'VALID'">Opslaan</button>
 					</form>
 				</div>
 			</div>
