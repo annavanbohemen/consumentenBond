@@ -1,0 +1,26 @@
+.page-container{
+	background-color: #B6D9E2;
+
+	.card{
+
+		@media only screen and (min-width: 900px){
+			width: 40%;
+		}
+		
+		margin-bottom: 1%;
+
+		.card-title{
+			font-weight: bold;
+	
+			.contactPeroonLogo{
+				width: 3%;
+				margin-right: 2%;
+			}
+		}
+
+		.label {
+			font-weight: bold;
+		}
+	}
+	
+}

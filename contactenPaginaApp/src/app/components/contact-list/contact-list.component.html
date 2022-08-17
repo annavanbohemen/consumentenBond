@@ -1,0 +1,51 @@
+<div class="page-container">
+	<div class="container">
+		<div class="content-wrapper">
+			<div class="header-wrapper">
+				<h1 class="header">Contacten Lijst</h1>
+			</div>
+
+			<div class="contact-cards">
+				<div *ngFor="let contact of Contacts">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title">
+								<img src="../../../assets/contactpersoon.png" alt="contactpersoon" class="contactPeroonLogo">
+								{{contact.contact}}
+							</h3>
+
+							<div class="card-text">
+								<form>
+									<div class="form-group row">
+										<label for="staticname" class="col-sm-4 col-form-label label">Naam</label>
+										<div class="col-sm-8">
+										  <input type="text" readonly class="form-control-plaintext" id="staticname" value="{{contact.name}}">
+										</div>
+									</div>
+									<div class="form-group row" *ngIf="contact.email">
+									  <label for="staticEmail" class="col-sm-4 col-form-label label">E-mail adres</label>
+									  <div class="col-sm-8">
+										<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{contact.email}}">
+									  </div>
+									</div>
+									<div class="form-group row" *ngIf="contact.phone">
+										<label for="staticPhone" class="col-sm-4 col-form-label label">Telefoonnummer</label>
+										<div class="col-sm-8">
+										  <input type="number" readonly class="form-control-plaintext" id="staticPhone" value="{{contact.phone}}">
+										</div>
+									  </div>
+								  </form>
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+		
+	

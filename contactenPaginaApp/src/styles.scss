@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: SharpSans,Helvetica,Arial,sans-serif; color: #05164c;}
+
+.content-wrapper{
+	padding-top: 5%;
+	padding-bottom: 5%;
+	overflow: hidden;
+}
+
+.header {
+    font-weight: 700 !important;
+}
+
+.navbar{
+	background-color: white;
+}
+
+.nav-link{
+	color: #05164c;
+	font-weight: bold;
+	font-size: large;
+}
+
+.navbar-nav .nav-link.active {
+	color: #05164c;
+}
+

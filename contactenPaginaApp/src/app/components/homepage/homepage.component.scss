@@ -1,0 +1,38 @@
+
+
+.page-container{
+	background-color:  #004df5;
+
+	.content-wrapper {
+		display: flex;
+
+		.text-wrapper{
+			padding: 10px;
+			width: 50%;	
+
+			.header{
+				color: white
+			}
+		
+			p{
+				color: white;
+				font-weight: 400;
+				font-size: large;
+				word-wrap: break-word;
+			}
+		}
+	
+		.img-wrapper{
+			width: 50%;
+			
+
+			img {
+				width: 100%;
+			}
+		}
+	
+	
+	}
+
+	
+}
