@@ -1,0 +1,51 @@
+<div class="page-container">
+	<div class="container">
+		<div class="content-wrapper">
+			<div class="header-wrapper">
+				<h1 class="header">Toevoegen van contacten:</h1>
+
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="advancedCheck" (change)="checkChange()">
+					<label class="form-check-label" for="advancedCheck">
+					Geavanceerd
+					</label>
+				</div>
+			</div>
+
+			<div class="contact-form">
+				<div class="card">
+					<form (submit)="onSubmit()" class="card-body">
+						<div class="mb-3">
+							<label for="inputState" class="form-label">Contact soort</label>
+							<select id="inputState" class="form-control" [formControl]="work">
+								<option value="" disabled selected hidden>werk of privé</option>
+								<option value="werk">Werk</option>
+								<option value="prive">Privé</option>
+							</select>
+						  </div>
+						<div class="mb-3">
+						  <label for="name" class="form-label">Naam</label>
+						  <input type="name" class="form-control" [formControl]="name" id="name" placeholder="vul uw naam in">
+						</div>
+						<ng-container *ngIf="basic">
+							<div class="mb-3">
+								<label for="email" class="form-label">E-mail adres</label>
+								<input type="email" class="form-control" id="email" placeholder="name@example.com">
+							  </div>
+							<div class="mb-3">
+								<label for="phone" class="form-label">Telefoonnummer</label>
+								<input type="number" class="form-control" id="phone" placeholder="0612345678">
+							</div>
+						</ng-container>
+						
+						<button type="submit" class="btn btn-primary">Opslaan</button>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+	
+
