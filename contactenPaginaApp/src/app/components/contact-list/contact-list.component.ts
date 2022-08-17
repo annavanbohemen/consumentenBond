@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IContact } from 'src/app/models/contact';
 import { ContactService } from 'src/app/service/contact.service';
 
@@ -13,7 +14,9 @@ export class ContactListComponent implements OnInit {
   loading = false;
   basic = false;
 
-  constructor(private contactService: ContactService) { }
+  constructor(
+    private contactService: ContactService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // get contacts from service
@@ -29,10 +32,16 @@ export class ContactListComponent implements OnInit {
   deleteContact(contact: IContact){
     this.loading = true;
     if(contact.id){
-      this.contactService.removeContacts(contact.id).subscribe(res => {
+      this.contactService.removeContacts(contact.id).subscribe(
+        res => {
+    this.toastr.success('contact is verwijderd', '', {positionClass: 'toast-top-center'});
         this.getContacts();
         this.loading = false;
-      })
+        },
+        (err) => {
+           this.toastr.error(err, '',  {positionClass: 'toast-top-center'})
+          this.loading = false;
+        })
     }
   }
 

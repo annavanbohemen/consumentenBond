@@ -27,3 +27,29 @@ body { margin: 0; font-family: SharpSans,Helvetica,Arial,sans-serif; color: #051
 	color: #05164c;
 }
 
+.toast-top-center {
+	top: 0;
+	margin-top: 0;
+}
+
+.toast-container {
+	color: #05164c;
+	font-weight: bold;
+	border-radius: 25px !important;
+	padding: 15px;
+}
+
+.toast-container .toast {
+	border-radius: 25px !important;
+}
+
+.toast-success{
+	background-color: rgba(96, 211, 96, 0.418);
+	padding: 15px;
+}
+
+.toast-error { 
+	background-color: rgba(211, 100, 96, 0.548);
+	padding: 15px;
+}
+

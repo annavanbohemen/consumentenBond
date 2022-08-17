@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { AddContactComponent } from './components/add-contact/add-contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 export const HttpInterceptorProviders = { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
 
@@ -27,7 +28,8 @@ export const HttpInterceptorProviders = { provide: HTTP_INTERCEPTORS, useClass: 
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     HttpInterceptorProviders

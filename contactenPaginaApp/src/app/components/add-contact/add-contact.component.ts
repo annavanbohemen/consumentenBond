@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/service/contact.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class AddContactComponent implements OnInit {
   loading = false;
   basic = false;
 
-  constructor(private contactService: ContactService, private fb: FormBuilder) { }
+  constructor(
+    private contactService: ContactService, 
+    private fb: FormBuilder,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -42,12 +46,12 @@ export class AddContactComponent implements OnInit {
       
       this.contactService.postContact(contactParams)
       .subscribe((res) => {
-          console.log('contact is opgeslagen', res)
+        this.toastr.success('contact is opgeslagen', '',  {positionClass: 'toast-top-center'})
           this.loading = false;
           this.contactForm.reset();
         },
         (err) => {
-          console.log('error', err)
+          this.toastr.error(err, '', {positionClass: 'toast-top-center'})
           this.loading = false;
         }
         )
