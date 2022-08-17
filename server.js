@@ -38,30 +38,26 @@ app.get("/contacten/list", (req, res) => {
 })
 
 
-//Default response for any other request
-app.use(function (req, res) {
-    res.status(400)
-})
-
 //Save contacts
-app.post("/contacten/save", (req, res, next) => {
+app.post("/contacten/save", (req, res) => {
+    
         var data = {
             work: req.body.work,
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone
         }
-    
+        
         saveContact(data, (err) => {
-                    if(err) {
-                        res.status(400).json({"error": err.message})
-                        return;
-                    }
-    
-                    res.json({
-                        "contact": data
-                    })
-                });
+            if(err) {
+                res.status(400).json({"error": err.message})
+                return;
+            }
+
+            res.json({
+                "contact": data
+            })
+        });
 });
 
 //remove contact
@@ -76,6 +72,7 @@ app.delete("contacten/delete", (req, res) => {
             return;
         }
 
+
         res.json({
             "message": "success"
         })
@@ -84,14 +81,15 @@ app.delete("contacten/delete", (req, res) => {
 
 // functions for db calls
 function saveContact(data, callback){
-    var sql = 'INSERT INTO contactenAdvanced (name, email, phone) VALUES (?,?,?)'
+    console.log(data)
+    var sql = 'INSERT INTO contacten (name, email, phone) VALUES (?,?,?)'
     var params = [data.name, data.email, data.phone]
 
     db.run(sql, params, callback)
 }
 
 function removeContact(data, callback){
-    var sql = 'DELETE FROM contactenAdvanced WHERE id = ?'
+    var sql = 'DELETE FROM contacten WHERE id = ?'
     var params = [data.id]
 
     db.run(sql, params, callback)
