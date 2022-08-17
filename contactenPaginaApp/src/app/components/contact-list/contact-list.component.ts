@@ -47,6 +47,12 @@ export class ContactListComponent implements OnInit {
       this.capitalizeFirstLetter(this.Contacts)
   }
 
+  deleteContact(contact: IContact){
+    this.contactService.removeContacts().subscribe(res => {
+      console.log('response', res)
+    })
+  }
+
   capitalizeFirstLetter(contacts: IContact[]) {
     for(let i = 0; i < contacts.length; i++) {
       contacts[i].contact = contacts[i].contact.charAt(0).toUpperCase() + contacts[i].contact.slice(1)

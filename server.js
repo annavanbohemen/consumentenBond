@@ -47,6 +47,7 @@ app.use(function (req, res) {
 //Save contacts
 app.post("/contacten/save", (req, res, next) => {
         var data = {
+            work: req.body.work,
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone
@@ -64,10 +65,35 @@ app.post("/contacten/save", (req, res, next) => {
                 });
 });
 
+//remove contact
+app.delete("contacten/delete", (req, res) => {
+    var data = {
+        id: req.body.id
+    }
+
+    removeContact(data, (err) => {
+        if(err) {
+            res.status(400).json({"error": err.message})
+            return;
+        }
+
+        res.json({
+            "message": "success"
+        })
+    });
+})
+
 // functions for db calls
 function saveContact(data, callback){
     var sql = 'INSERT INTO contactenAdvanced (name, email, phone) VALUES (?,?,?)'
     var params = [data.name, data.email, data.phone]
+
+    db.run(sql, params, callback)
+}
+
+function removeContact(data, callback){
+    var sql = 'DELETE FROM contactenAdvanced WHERE id = ?'
+    var params = [data.id]
 
     db.run(sql, params, callback)
 }

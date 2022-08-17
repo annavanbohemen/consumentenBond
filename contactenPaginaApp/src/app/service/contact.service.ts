@@ -9,7 +9,8 @@ import { createHttpParams } from './http-params';
 })
 export class ContactService {
 
-  private ContactUrl = 'contacten/save';
+  private ContactSaveUrl = 'contacten/save';
+  private ContactDeleteUrl = 'contacten/delete';
   private ContactListUrl = 'contacten/list';
 
   constructor(private http: HttpClient) { }
@@ -24,7 +25,7 @@ export class ContactService {
     })
 
     return this.http.post<IContact>(
-      `${this.ContactUrl}/${contactInfo.version}`,
+      `${this.ContactSaveUrl}/${contactInfo.version}`,
       contactInfo, {
         responseType: 'json'
       })
@@ -33,6 +34,13 @@ export class ContactService {
   getContacts(): Observable<IContactsList> {
     return this.http.get<IContactsList>(
       this.ContactListUrl, {
+        responseType: 'json'
+      })
+  }
+
+  removeContacts(): Observable<IContact> {
+    return this.http.get<IContact>(
+      this.ContactDeleteUrl, {
         responseType: 'json'
       })
   }
