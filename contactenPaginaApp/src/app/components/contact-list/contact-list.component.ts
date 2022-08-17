@@ -34,7 +34,7 @@ export class ContactListComponent implements OnInit {
     if(contact.id){
       this.contactService.removeContacts(contact.id).subscribe(
         res => {
-    this.toastr.success('contact is verwijderd', '', {positionClass: 'toast-top-center'});
+        this.toastr.success('contact is verwijderd', '', {positionClass: 'toast-top-center'});
         this.getContacts();
         this.loading = false;
         },
@@ -42,12 +42,6 @@ export class ContactListComponent implements OnInit {
            this.toastr.error(err, '',  {positionClass: 'toast-top-center'})
           this.loading = false;
         })
-    }
-  }
-
-  capitalizeFirstLetter(contacts: IContact[]) {
-    for(let i = 0; i < contacts.length; i++) {
-      contacts[i].contact = contacts[i].contact.charAt(0).toUpperCase() + contacts[i].contact.slice(1)
     }
   }
 

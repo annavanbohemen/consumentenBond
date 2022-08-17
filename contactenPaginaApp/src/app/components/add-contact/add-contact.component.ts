@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddContactComponent implements OnInit {
 
   contactForm!: FormGroup;
-  loading = false;
+  loading!: boolean;
   basic = false;
 
   constructor(
@@ -21,6 +21,8 @@ export class AddContactComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.setLoading(false);
+    
     this.contactForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       work: new FormControl('', Validators.required),
@@ -34,8 +36,12 @@ export class AddContactComponent implements OnInit {
     this.basic = !this.basic
   }
 
+  setLoading(load: boolean){
+    this.loading = load
+  }
+
   onSubmit() {
-    this.loading = true;
+    this.setLoading(true)
 
     let contactParams = {
         work: this.contactForm.value.work,
@@ -47,12 +53,12 @@ export class AddContactComponent implements OnInit {
       this.contactService.postContact(contactParams)
       .subscribe((res) => {
         this.toastr.success('contact is opgeslagen', '',  {positionClass: 'toast-top-center'})
-          this.loading = false;
+          this.setLoading(false)
           this.contactForm.reset();
         },
         (err) => {
           this.toastr.error(err, '', {positionClass: 'toast-top-center'})
-          this.loading = false;
+          this.setLoading(false)
         }
         )
   }
